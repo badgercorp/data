@@ -26,7 +26,7 @@ type Metadata struct {
 	Timestamp string        `json:"timestamp" bson:"timestamp"`
 	UUID      string        `json:"uuid" bson:"uuid"`
 	Status    string        `json:"status" bson:"status"`
-	Errors    []interface{} `json:"errors" bson:"errors"`
+	Errors    []error       `json:"errors" bson:"errors"`
 	Parents   string        `json:"parent" bson:"parent"`
 }
 
@@ -52,7 +52,7 @@ func (n *Note) WithContext(domain string, group string) *Note {
 	return n
 }
 
-func (n *Note) WithMetadata(notetype string, path string, platform string, uri URI, timestamp string, status string, errors []interface{}, parent string) *Note {
+func (n *Note) WithMetadata(notetype string, path string, platform string, uri URI, timestamp string, status string, errors []error, parent string) *Note {
 
 	n.Metadata = Metadata{
 		Type:     notetype,
@@ -65,11 +65,8 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 		Timestamp: timestamp,
 		UUID:      uuid.New().String(),
 		Status:    status,
+		Errors:    errors,
 		Parents:   parent,
-	}
-	
-	if errors != nil {
-		n.Metadata.Errors = errors	
 	}
 
 	return n
