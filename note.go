@@ -65,8 +65,11 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 		Timestamp: timestamp,
 		UUID:      uuid.New().String(),
 		Status:    status,
-		Errors:    errors,
 		Parents:   parent,
+	}
+	
+	if errors != nil {
+		n.Metadata.Errors = errors	
 	}
 
 	return n
