@@ -99,9 +99,7 @@ func (n *Note) WithDetailConversion(detail interface{}) *Note {
 	d, _ := json.Marshal(detail)
 	_ = json.Unmarshal(d, &insert)
 
-	n.Procedure = insert
-
-	return n
+	return n.WithDetail(insert)
 }
 
 func (n *Note) WithPolicy(policy map[string]interface{}) *Note {
@@ -117,9 +115,7 @@ func (n *Note) WithPolicyConversion(policy interface{}) *Note {
 	d, _ := json.Marshal(policy)
 	_ = json.Unmarshal(d, &insert)
 
-	n.Procedure = insert
-
-	return n
+	return n.WithProcedure(insert)
 }
 
 func (n *Note) WithProcedure(procedure map[string]interface{}) *Note {
@@ -135,7 +131,5 @@ func (n *Note) WithProcedureConversion(procedure interface{}) *Note {
 	d, _ := json.Marshal(procedure)
 	_ = json.Unmarshal(d, &insert)
 
-	n.Procedure = insert
-
-	return n
+	return n.WithProcedure(insert)
 }
