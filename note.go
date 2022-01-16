@@ -42,6 +42,7 @@ type Entity struct {
 	Component    string `json:"component" bson:"component"`
 	Organization string `json:"organization" bson:"organization"`
 	Version      string `json:"version" bson:"version"`
+	Key			 string `json:"string" bson:"string"`
 }
 
 func (n *Note) WithContext(domain string, group string) *Note {
