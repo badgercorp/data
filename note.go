@@ -43,7 +43,7 @@ type Entity struct {
 	Component    string `json:"component" bson:"component"`
 	Organization string `json:"organization" bson:"organization"`
 	Version      string `json:"version" bson:"version"`
-	Key			 string `json:"string" bson:"string"`
+	Key          string `json:"string" bson:"string"`
 }
 
 func (n *Note) WithContext(domain string, group string) *Note {
@@ -80,7 +80,7 @@ func (n *Note) WithEntity(id int, key string, component string, organization str
 
 	n.Entity = Entity{
 		ID:           id,
-		Key:		  key,
+		Key:          key,
 		Component:    component,
 		Organization: organization,
 		Version:      version,
