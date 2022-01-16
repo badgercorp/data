@@ -67,7 +67,7 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 			Web: uri.Web,
 		},
 		Timestamp: timestamp,
-		UUID:      uuid.New().String(),
+		NoteID:    uuid.New().String(),
 		Status:    status,
 		Errors:    errors,
 		Parents:   parent,
