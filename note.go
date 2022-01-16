@@ -26,7 +26,8 @@ type Metadata struct {
 	Platform  string  `json:"platform" bson:"platform"`
 	URI       URI     `json:"uri" bson:"uri"`
 	Timestamp string  `json:"timestamp" bson:"timestamp"`
-	UUID      string  `json:"uuid" bson:"uuid"`
+	NoteID    string  `json:"noteid" bson:"noteid"`
+	BaseID    string  `json:"baseid" bson:"baseid"`
 	Status    string  `json:"status" bson:"status"`
 	Errors    []error `json:"errors" bson:"errors"`
 	Parents   string  `json:"parent" bson:"parent"`
@@ -42,6 +43,7 @@ type Entity struct {
 	Component    string `json:"component" bson:"component"`
 	Organization string `json:"organization" bson:"organization"`
 	Version      string `json:"version" bson:"version"`
+	Key			 string `json:"string" bson:"string"`
 }
 
 func (n *Note) WithContext(domain string, group string) *Note {
@@ -65,7 +67,7 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 			Web: uri.Web,
 		},
 		Timestamp: timestamp,
-		UUID:      uuid.New().String(),
+		NoteID:    uuid.New().String(),
 		Status:    status,
 		Errors:    errors,
 		Parents:   parent,
@@ -74,10 +76,11 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 	return n
 }
 
-func (n *Note) WithEntity(id int, component string, organization string, version string) *Note {
+func (n *Note) WithEntity(id int, key string, component string, organization string, version string) *Note {
 
 	n.Entity = Entity{
 		ID:           id,
+		Key:		  key,
 		Component:    component,
 		Organization: organization,
 		Version:      version,
