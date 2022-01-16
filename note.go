@@ -1,33 +1,35 @@
 package data
 
 import (
+	"encoding/json"
 	"github.com/google/uuid"
 )
 
 type Note struct {
-	Context   Context     `json:"context" bson:"context"`
-	Metadata  Metadata    `json:"metadata" bson:"metadata"`
-	Entity    Entity      `json:"entity" bson:"entity"`
-	Detail    interface{} `json:"detail" bson:"detail"`
-	Policy    interface{} `json:"policy,omitempty" bson:"policy,omitempty"`
-	Procedure interface{} `json:"procedure,omitempty" bson:"procedure,omitempty"`
+	Context   Context                `json:"context" bson:"context"`
+	Metadata  Metadata               `json:"metadata" bson:"metadata"`
+	Entity    Entity                 `json:"entity" bson:"entity"`
+	Detail    map[string]interface{} `json:"detail" bson:"detail"`
+	Policy    map[string]interface{} `json:"policy,omitempty" bson:"policy,omitempty"`
+	Procedure map[string]interface{} `json:"procedure,omitempty" bson:"procedure,omitempty"`
 }
 
 type Context struct {
-	Domain string `json:"domain" bson:"domain"`
-	Group  string `json:"group" bson:"group"`
+	Domain  string `json:"domain" bson:"domain"`
+	Group   string `json:"group" bson:"group"`
+	Version string `json:"version" bson:"version"`
 }
 
 type Metadata struct {
-	Type      string        `json:"type" bson:"type"`
-	Path      string        `json:"path" bson:"path"`
-	Platform  string        `json:"platform" bson:"platform"`
-	URI       URI           `json:"uri" bson:"uri"`
-	Timestamp string        `json:"timestamp" bson:"timestamp"`
-	UUID      string        `json:"uuid" bson:"uuid"`
-	Status    string        `json:"status" bson:"status"`
-	Errors    []error       `json:"errors" bson:"errors"`
-	Parents   string        `json:"parent" bson:"parent"`
+	Type      string  `json:"type" bson:"type"`
+	Path      string  `json:"path" bson:"path"`
+	Platform  string  `json:"platform" bson:"platform"`
+	URI       URI     `json:"uri" bson:"uri"`
+	Timestamp string  `json:"timestamp" bson:"timestamp"`
+	UUID      string  `json:"uuid" bson:"uuid"`
+	Status    string  `json:"status" bson:"status"`
+	Errors    []error `json:"errors" bson:"errors"`
+	Parents   string  `json:"parent" bson:"parent"`
 }
 
 type URI struct {
@@ -84,23 +86,50 @@ func (n *Note) WithEntity(id int, component string, organization string, version
 	return n
 }
 
-func (n *Note) WithDetail(detail interface{}) *Note {
+func (n *Note) WithDetail(detail map[string]interface{}) *Note {
 
 	n.Detail = detail
 
 	return n
 }
 
-func (n *Note) WithPolicy(policy interface{}) *Note {
+func (n *Note) WithDetailConversion(detail interface{}) *Note {
+	var insert map[string]interface{}
+
+	d, _ := json.Marshal(detail)
+	_ = json.Unmarshal(d, &insert)
+
+	return n.WithDetail(insert)
+}
+
+func (n *Note) WithPolicy(policy map[string]interface{}) *Note {
 
 	n.Policy = policy
 
 	return n
 }
 
-func (n *Note) WithProcedure(procedure interface{}) *Note {
+func (n *Note) WithPolicyConversion(policy interface{}) *Note {
+	var insert map[string]interface{}
+
+	d, _ := json.Marshal(policy)
+	_ = json.Unmarshal(d, &insert)
+
+	return n.WithProcedure(insert)
+}
+
+func (n *Note) WithProcedure(procedure map[string]interface{}) *Note {
 
 	n.Procedure = procedure
 
 	return n
+}
+
+func (n *Note) WithProcedureConversion(procedure interface{}) *Note {
+	var insert map[string]interface{}
+
+	d, _ := json.Marshal(procedure)
+	_ = json.Unmarshal(d, &insert)
+
+	return n.WithProcedure(insert)
 }
