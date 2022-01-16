@@ -75,10 +75,11 @@ func (n *Note) WithMetadata(notetype string, path string, platform string, uri U
 	return n
 }
 
-func (n *Note) WithEntity(id int, component string, organization string, version string) *Note {
+func (n *Note) WithEntity(id int, key string, component string, organization string, version string) *Note {
 
 	n.Entity = Entity{
 		ID:           id,
+		Key:		  key,
 		Component:    component,
 		Organization: organization,
 		Version:      version,
