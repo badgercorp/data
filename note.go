@@ -26,7 +26,8 @@ type Metadata struct {
 	Platform  string  `json:"platform" bson:"platform"`
 	URI       URI     `json:"uri" bson:"uri"`
 	Timestamp string  `json:"timestamp" bson:"timestamp"`
-	UUID      string  `json:"uuid" bson:"uuid"`
+	NoteID    string  `json:"noteid" bson:"noteid"`
+	BaseID    string  `json:"baseid" bson:"baseid"`
 	Status    string  `json:"status" bson:"status"`
 	Errors    []error `json:"errors" bson:"errors"`
 	Parents   string  `json:"parent" bson:"parent"`
