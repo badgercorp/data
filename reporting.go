@@ -1,9 +1,17 @@
 package data
 
+type DisplayNote struct {
+	Display Display `json:"display"`
+	Filter  Filter  `json:"filter"`
+	Entity  Entity  `json:"entity"`
+}
 type Display struct {
-	Entity      Entity 			   `json:"entity,omitempty" bson:"entity"`
 	Badge       DisplayBadge       `json:"badge,omitempty" bson:"badge"`
 	Description DisplayDescription `json:"description,omitempty" bson:"description"`
+}
+
+type Filter struct {
+	ID string `json:"string"`
 }
 
 type DisplayDescription struct {
