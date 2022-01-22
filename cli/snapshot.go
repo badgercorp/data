@@ -27,7 +27,8 @@ type Repository struct {
 	Organization string `json:"organization" bson:"organization"`
 	Name         string `json:"name" bson:"name"`
 	Slug         string `json:"slug" bson:"slug"`
-	Apiurl       string `json:"apiurl" bson:"apiurl"`
+	APIURL       string `json:"apiurl" bson:"apiurl"`
+	WebURL       string `json:"weburl" bson:"weburl"`
 }
 
 type Version struct {
