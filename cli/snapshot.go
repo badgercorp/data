@@ -23,6 +23,7 @@ type Commit struct {
 }
 
 type Repository struct {
+	ID           string `json:"id"`
 	Organization string `json:"organization" bson:"organization"`
 	Name         string `json:"name" bson:"name"`
 	Slug         string `json:"slug" bson:"slug"`
